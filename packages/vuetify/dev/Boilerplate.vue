@@ -4,7 +4,9 @@
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs8 text-xs-center>
-            <slot></slot>
+            <slot>
+              <v-tree-select></v-tree-select>
+            </slot>
           </v-flex>
         </v-layout>
       </v-container>
