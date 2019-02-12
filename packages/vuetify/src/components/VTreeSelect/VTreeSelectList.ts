@@ -7,13 +7,13 @@ import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
 
 export default mixins(
-    RegistrableProvide('treeselectlist'),
-    Themeable, Colorable
-    /* @vue/component */
-  ).extend({
-    name: 'v-tree-select-list',
+  RegistrableProvide('treeselectlist'),
+  Themeable, Colorable
+  /* @vue/component */
+).extend({
+  name: 'v-tree-select-list',
 
-    provide (): object {
-      return { treeselectlist: this }
-    }
+  provide (): object {
+    return { treeselectlist: this }
+  }
 })

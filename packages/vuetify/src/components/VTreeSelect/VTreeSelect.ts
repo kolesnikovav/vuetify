@@ -1,6 +1,6 @@
 import VSelect from '../VSelect/VSelect'
 
 export default VSelect.extend({
-    name: 'v-tree-select'
+  name: 'v-tree-select'
 
 })
