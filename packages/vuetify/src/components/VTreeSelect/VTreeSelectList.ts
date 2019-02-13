@@ -9,7 +9,7 @@ import { VListTile, VListTileContent, VListTileTitle, VList } from '../VList'
 import Themeable from '../../mixins/themeable'
 import Colorable from '../../mixins/colorable'
 import VTreeview from '../VTreeview/VTreeview'
-import VTreeviewNode, { VTreeviewNodeProps } from '../VTreeview/VTreeviewNode'
+import { VTreeviewNodeProps } from '../VTreeview/VTreeviewNode'
 import {
   FilterTreeItemFunction
 } from '../VTreeview/util/filterTreeItems'

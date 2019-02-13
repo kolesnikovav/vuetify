@@ -5,6 +5,7 @@ import { consoleError } from '../../../util/console'
 import VTreeSelectList from '../VTreeSelectList'
 import { defaultMenuProps } from '../../VSelect/VSelect'
 import { getPropertyFromItem } from '../../../util/helpers'
+import VTextField from '../../VTextField/VTextField'
 
 type NodeArray = (string | number)[]
 
@@ -12,6 +13,7 @@ export default Vue.extend({
   name: 'treeselectable',
 
   props: {
+    color: VTextField.options.props.color,
     /* VSelect props */
     appendIcon: {
       type: String,
@@ -85,13 +87,12 @@ export default Vue.extend({
   }),
   computed: {
     listData (): any {
-      const scopeId = this.$vnode && this.$vnode.context.$options._scopeId
+      const scopeId: any = null
       return {
         attrs: scopeId ? {
           [scopeId]: true
         } : null,
         props: {
-          action: this.multiple && !this.isHidingSelected,
           color: this.color,
           dense: this.dense,
           hideSelected: this.hideSelected,
