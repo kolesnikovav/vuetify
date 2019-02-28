@@ -7,7 +7,7 @@ import mixins from '../../util/mixins'
 
 // Types
 import { VNode } from 'vue'
-import { NativeLocaleFormatter } from './util/createNativeLocaleFormatter'
+import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
 
 export default mixins(
   DatePickerTable
@@ -16,8 +16,8 @@ export default mixins(
   name: 'v-date-picker-month-table',
 
   computed: {
-    formatter (): NativeLocaleFormatter {
-      return this.format || createNativeLocaleFormatter(this.locale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 })
+    formatter (): DatePickerFormatter {
+      return this.format || createNativeLocaleFormatter(this.currentLocale, { month: 'short', timeZone: 'UTC' }, { start: 5, length: 2 })
     }
   },
 

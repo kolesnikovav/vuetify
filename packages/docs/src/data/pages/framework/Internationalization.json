@@ -1,6 +1,7 @@
 {
   "title": "header",
   "titleText": "headerText",
+  "mdLink": "https://material.io/design/usability/bidirectionality.html",
   "children": [
     {
       "type": "section",
@@ -25,6 +26,9 @@
         {
           "type": "text",
           "lang": "availableLocalesText"
+        },
+        {
+          "type": "locales"
         },
         {
           "type": "markup",

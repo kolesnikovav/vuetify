@@ -7,6 +7,7 @@
       :padding="padding"
       :line-width="width"
       :stroke-linecap="lineCap"
+      :gradient-direction="gradientDirection"
       auto-draw
     ></v-sparkline>
 
@@ -59,9 +60,19 @@
         <v-layout fill-height align-center>
           <v-subheader class="pl-0">Linecap</v-subheader>
           <v-btn-toggle v-model="lineCap" mandatory>
-            <v-btn flat value="butt">butt</v-btn>
-            <v-btn flat value="round">round</v-btn>
-            <v-btn flat value="square">square</v-btn>
+            <v-btn text value="butt">butt</v-btn>
+            <v-btn text value="round">round</v-btn>
+            <v-btn text value="square">square</v-btn>
+          </v-btn-toggle>
+        </v-layout>
+
+        <v-layout fill-height align-center>
+          <v-subheader class="pl-0">Gradient direction</v-subheader>
+          <v-btn-toggle v-model="gradientDirection" mandatory>
+            <v-btn text value="top">top</v-btn>
+            <v-btn text value="right">right</v-btn>
+            <v-btn text value="left">left</v-btn>
+            <v-btn text value="bottom">bottom</v-btn>
           </v-btn-toggle>
         </v-layout>
       </v-flex>
@@ -114,6 +125,7 @@
       lineCap: 'round',
       gradient: gradients[5],
       value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
+      gradientDirection: 'top',
       gradients
     })
   }

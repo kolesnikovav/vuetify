@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="$vuetify.dark">
+  <v-app :dark="$vuetify.theme.dark">
     <v-toolbar
       color="blue-grey"
       dark
@@ -23,7 +23,7 @@
       <v-btn
         icon
         title="Change theme"
-        @click="$vuetify.dark = !$vuetify.dark"
+        @click="$vuetify.theme.dark = !$vuetify.theme.dark"
       >
         <v-icon>
           mdi-invert-colors
@@ -95,6 +95,7 @@
     data: () => ({
       items: [
         { title: 'Home', to: '/' },
+        { title: 'Custom theme config', to: '/theme' },
         ...items
       ],
       drawer: false

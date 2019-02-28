@@ -6,7 +6,7 @@ interface ClickOutsideBindingArgs {
 }
 
 interface ClickOutsideDirective extends VNodeDirective {
-  value: (e: Event) => void
+  value?: (e: Event) => void
   args?: ClickOutsideBindingArgs
 }
 
@@ -48,7 +48,7 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
   // Note that, because we're in the capture phase, this callback will occure before
   // the bubbling click event on any outside elements.
   !clickedInEls(e, elements) && setTimeout(() => {
-    isActive(e) && binding.value(e)
+    isActive(e) && binding.value && binding.value(e)
   }, 0)
 }
 
@@ -73,29 +73,35 @@ function clickedInEl (el: HTMLElement, x: number, y: number): boolean {
   return x >= b.left && x <= b.right && y >= b.top && y <= b.bottom
 }
 
-export default {
-  // [data-app] may not be found
-  // if using bind, inserted makes
-  // sure that the root element is
-  // available, iOS does not support
-  // clicks on body
-  inserted (el: HTMLElement, binding: ClickOutsideDirective) {
-    const onClick = (e: Event) => directive(e as PointerEvent, el, binding)
-    // iOS does not recognize click events on document
-    // or body, this is the entire purpose of the v-app
-    // component and [data-app], stop removing this
-    const app = document.querySelector('[data-app]') ||
-      document.body // This is only for unit tests
-    app.addEventListener('click', onClick, true)
-    el._clickOutside = onClick
-  },
-
-  unbind (el: HTMLElement) {
-    if (!el._clickOutside) return
-
-    const app = document.querySelector('[data-app]') ||
-      document.body // This is only for unit tests
-    app && app.removeEventListener('click', el._clickOutside, true)
-    delete el._clickOutside
-  }
+// [data-app] may not be found
+// if using bind, inserted makes
+// sure that the root element is
+// available, iOS does not support
+// clicks on body
+function inserted (el: HTMLElement, binding: ClickOutsideDirective) {
+  const onClick = (e: Event) => directive(e as PointerEvent, el, binding)
+  // iOS does not recognize click events on document
+  // or body, this is the entire purpose of the v-app
+  // component and [data-app], stop removing this
+  const app = document.querySelector('[data-app]') ||
+    document.body // This is only for unit tests
+  app.addEventListener('click', onClick, true)
+  el._clickOutside = onClick
 }
+
+function unbind (el: HTMLElement) {
+  if (!el._clickOutside) return
+
+  const app = document.querySelector('[data-app]') ||
+    document.body // This is only for unit tests
+  app && app.removeEventListener('click', el._clickOutside, true)
+  delete el._clickOutside
+}
+
+const clickOutside = {
+  inserted,
+  unbind
+}
+
+export { clickOutside }
+export default clickOutside

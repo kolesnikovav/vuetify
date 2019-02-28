@@ -206,6 +206,10 @@ const textEvents = [
 
 const inputSlots = ['append', 'prepend', 'default']
 
+const textFieldSlots = [...inputSlots, 'append-outer', 'prepend-inner', 'label']
+
+const selectSlots = [...textFieldSlots, 'append-item', 'prepend-item']
+
 const VSelect = {
   props: [
     {
@@ -221,7 +225,7 @@ const VSelect = {
       default: '{"closeOnClick":false, "closeOnContentClick":false, "openOnClick":false, "maxHeight":300}'
     }
   ],
-  slots: inputSlots.concat(['no-data', 'label', 'progress']),
+  slots: selectSlots.concat(['no-data', 'progress']),
   scopedSlots: [
     {
       name: 'selection',
@@ -229,6 +233,7 @@ const VSelect = {
         parent: 'VueComponent',
         item: 'object',
         index: 'number',
+        select: 'function',
         selected: 'boolean',
         disabled: 'boolean'
       }
@@ -350,6 +355,16 @@ module.exports = {
         name: 'value',
         default: '{}',
         type: 'Object'
+      },
+      {
+        name: 'center',
+        default: 'false',
+        type: 'Boolean'
+      },
+      {
+        name: 'class',
+        default: '""',
+        type: 'string'
       }
     ]
   },
@@ -556,7 +571,7 @@ module.exports = {
       },
       {
         name: 'touchmove:day',
-        value:VTimestampWithTime
+        value: VTimestampWithTime
       },
       {
         name: 'touchend:day',
@@ -906,11 +921,22 @@ module.exports = {
     ]
   },
   'v-icon': {
-    slots: ['default']
+    slots: ['default'],
+    props: [
+      {
+        name: 'dense',
+        type: 'boolean',
+        default: 'false',
+        'source': null
+      }
+    ]
   },
   'v-input': {
     events: [
       ...inputEvents
+    ],
+    slots: [
+      ...inputSlots
     ]
   },
   'v-layout': {
@@ -1108,7 +1134,7 @@ module.exports = {
     slots: ['default'],
     events: [
       {
-        name: 'input',
+        name: 'change',
         value: 'string'
       }
     ]
@@ -1123,7 +1149,7 @@ module.exports = {
     slots: ['default'],
     events: [
       {
-        name: 'input',
+        name: 'change',
         value: 'string'
       }
     ]
@@ -1141,12 +1167,47 @@ module.exports = {
       ...inputEvents,
       ...textEvents
     ].concat(validatableEvents),
-    slots: ['label']
+    slots: [
+      ...textFieldSlots
+    ]
+  },
+  'v-textarea': {
+    events: [
+      {
+        name: 'input',
+        value: 'string'
+      },
+      {
+        name: 'change',
+        value: 'string'
+      },
+      ...inputEvents,
+      ...textEvents
+    ].concat(validatableEvents),
+    slots: [
+      ...textFieldSlots
+    ]
   },
   'v-time-picker': {
     events: [
       {
         name: 'input',
+        value: 'string'
+      },
+      {
+        name: 'change',
+        value: 'string'
+      },
+      {
+        name: 'click:hour',
+        value: 'string'
+      },
+      {
+        name: 'click:minute',
+        value: 'string'
+      },
+      {
+        name: 'click:second',
         value: 'string'
       }
     ]
@@ -1178,6 +1239,12 @@ module.exports = {
       {
         name: 'append',
         props: VTreeviewScopedProps
+      }
+    ],
+    functions: [
+      {
+        name: 'updateAll',
+        signature: '(val: boolean): void'
       }
     ]
   },

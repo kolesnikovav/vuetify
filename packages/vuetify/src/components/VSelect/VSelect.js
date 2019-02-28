@@ -168,7 +168,7 @@ export default VTextField.extend({
           dense: this.dense,
           hideSelected: this.hideSelected,
           items: this.virtualizedItems,
-          noDataText: this.$vuetify.t(this.noDataText),
+          noDataText: this.$vuetify.lang.t(this.noDataText),
           selectedItems: this.selectedItems,
           itemAvatar: this.itemAvatar,
           itemDisabled: this.itemDisabled,
@@ -307,30 +307,26 @@ export default VTextField.extend({
         this.readonly ||
         this.getDisabled(item)
       )
-      const focus = (e, cb) => {
-        if (isDisabled) return
-
-        e.stopPropagation()
-        this.onFocus()
-        cb && cb()
-      }
 
       return this.$createElement(VChip, {
         staticClass: 'v-chip--select-multi',
+        attrs: { tabindex: -1 },
         props: {
           close: this.deletableChips && !isDisabled,
           disabled: isDisabled,
-          selected: index === this.selectedIndex,
+          inputValue: index === this.selectedIndex,
           small: this.smallChips
         },
         on: {
           click: e => {
-            focus(e, () => {
-              this.selectedIndex = index
-            })
+            if (isDisabled) return
+
+            e.stopPropagation()
+
+            this.selectedIndex = index
           },
           focus,
-          input: () => this.onChipInput(item)
+          'click:close': () => this.onChipInput(item)
         },
         key: this.getValue(item)
       }, this.getText(item))
@@ -517,6 +513,10 @@ export default VTextField.extend({
         parent: this,
         item,
         index,
+        select: e => {
+          e.stopPropagation()
+          this.selectedIndex = index
+        },
         selected: index === this.selectedIndex,
         disabled: this.disabled || this.readonly
       })
@@ -712,8 +712,9 @@ export default VTextField.extend({
       this.selectedItems = selectedItems
     },
     setValue (value) {
-      value !== this.internalValue && this.$emit('change', value)
+      const oldValue = this.internalValue
       this.internalValue = value
+      value !== oldValue && this.$emit('change', value)
     }
   }
 })

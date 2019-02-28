@@ -25,7 +25,7 @@
           v-if="menu2"
           v-model="time"
           full-width
-          @change="$refs.menu.save(time)"
+          @click:minute="$refs.menu.save(time)"
         ></v-time-picker>
       </v-menu>
     </v-flex>
@@ -53,8 +53,8 @@
           full-width
         >
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="modal2 = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.dialog.save(time)">OK</v-btn>
+          <v-btn text color="primary" @click="modal2 = false">Cancel</v-btn>
+          <v-btn text color="primary" @click="$refs.dialog.save(time)">OK</v-btn>
         </v-time-picker>
       </v-dialog>
     </v-flex>

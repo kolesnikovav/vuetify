@@ -7,7 +7,7 @@ import { createRange } from '../../util/helpers'
 import mixins from '../../util/mixins'
 
 // Types
-import { NativeLocaleFormatter } from './util/createNativeLocaleFormatter'
+import { DatePickerFormatter } from './util/createNativeLocaleFormatter'
 import { PropValidator } from 'vue/types/options'
 import { VNode, VNodeChildren } from 'vue'
 
@@ -23,17 +23,15 @@ export default mixins(
       default: 0
     },
     showWeek: Boolean,
-    weekdayFormat: {
-      type: Function
-    } as any as PropValidator<NativeLocaleFormatter | undefined>
+    weekdayFormat: Function as PropValidator<DatePickerFormatter | undefined>
   },
 
   computed: {
-    formatter (): NativeLocaleFormatter {
-      return this.format || createNativeLocaleFormatter(this.locale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 })
+    formatter (): DatePickerFormatter {
+      return this.format || createNativeLocaleFormatter(this.currentLocale, { day: 'numeric', timeZone: 'UTC' }, { start: 8, length: 2 })
     },
-    weekdayFormatter (): NativeLocaleFormatter | undefined {
-      return this.weekdayFormat || createNativeLocaleFormatter(this.locale, { weekday: 'narrow', timeZone: 'UTC' })
+    weekdayFormatter (): DatePickerFormatter | undefined {
+      return this.weekdayFormat || createNativeLocaleFormatter(this.currentLocale, { weekday: 'narrow', timeZone: 'UTC' })
     },
     weekDays (): string[] {
       const first = parseInt(this.firstDayOfWeek, 10)
