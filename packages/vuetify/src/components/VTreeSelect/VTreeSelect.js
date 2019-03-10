@@ -11,6 +11,10 @@ export default VAutocomplete.extend({
       type: Boolean,
       default: false
     },
+    selectType: {
+      type: String,
+      default: 'leaf'
+    },
     openAll: Boolean,
     ...VSelect.options.props,
     ...VAutocomplete.options.props,
@@ -20,16 +24,6 @@ export default VAutocomplete.extend({
     selectedItems: []
   }),
   computed: {
-    classes () {
-      if (this.autocomplete) {
-        return Object.assign({}, VSelect.options.computed.classes.call(this), {
-          'v-autocomplete': true,
-          'v-autocomplete--is-selecting-index': this.selectedIndex > -1
-        })
-      } else {
-        return Object.assign({}, VSelect.options.computed.classes.call(this), {})
-      }
-    },
     listData () {
       const data = VSelect.options.computed.listData.call(this)
       Object.assign(data.props, { ...VTreeviewNodeProps })
@@ -49,6 +43,7 @@ export default VAutocomplete.extend({
         itemChildren: this.itemChildren,
         transition: this.transition,
         selectedItems: this.selectedItems,
+        selectType: this.selectType,
         openAll: this.openAll,
         openOnClick: this.openOnClick })
       Object.assign(data.on, {

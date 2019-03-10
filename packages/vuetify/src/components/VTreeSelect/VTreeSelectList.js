@@ -66,6 +66,7 @@ export default mixins(
   },
   render (h) {
     const children = []
+
     if (!this.items || !Array.isArray(this.items) || this.items.length < 1) {
       children.push(this.$slots['no-data'] || this.staticNoDataTile)
     }
@@ -99,8 +100,12 @@ export default mixins(
           input: e => {
             this.$emit('select', e)
           }
+        },
+        scopedSlots: {
+          prepend: this.$slots['prepend-tree']
         }
-      }), childrenAppend
+      }),
+      childrenAppend
     ])
   }
 })
