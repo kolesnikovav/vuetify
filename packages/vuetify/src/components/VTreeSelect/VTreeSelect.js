@@ -62,12 +62,31 @@ export default VAutocomplete.extend({
   },
   methods: {
     register () {},
+    genList () {
+      // If there's no slots, we can use a cached VNode to improve performance
+      if (this.$slots['no-data'] || this.$slots['prepend-item'] || this.$slots['append-item'] || this.$slots['prepend-tree']) {
+        return this.genListWithSlot()
+      } else {
+        return this.staticList
+      }
+    },
     genListWithSlot () {
       const slots = ['prepend-item', 'no-data', 'append-item']
         .filter(slotName => this.$slots[slotName])
         .map(slotName => this.$createElement('template', {
           slot: slotName
         }, this.$slots[slotName]))
+      const tvewslots = ['prepend-tree']
+        .filter(slotName => this.$slots[slotName])
+        .map(slotName => this.$createElement('template', this.$slots[slotName]))
+      if (tvewslots) {
+        const sd = Object.assign({}, this.listData, {
+          scopedSlots: {
+            prepend: props => tvewslots
+          }
+        })
+        return this.$createElement(VTreeSelectList, sd, slots)
+      }
       // Requires destructuring due to Vue
       // modifying the `on` property when passed
       // as a referenced object
