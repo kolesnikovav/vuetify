@@ -10,6 +10,7 @@ import VMessages from '../VMessages'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 import Validatable from '../../mixins/validatable'
+import Contextmenu from '../../mixins/contextmenu'
 
 // Utilities
 import {
@@ -31,13 +32,15 @@ export default mixins<options &
   ExtractVue<[
     typeof Colorable,
     typeof Themeable,
-    typeof Validatable
+    typeof Validatable,
+    typeof Contextmenu
   ]>
 /* eslint-enable indent */
 >(
   Colorable,
   Themeable,
-  Validatable
+  Validatable,
+  Contextmenu
   /* @vue/component */
 ).extend({
   name: 'v-input',
