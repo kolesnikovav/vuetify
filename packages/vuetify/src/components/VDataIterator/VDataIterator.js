@@ -1,12 +1,14 @@
 import '../../stylus/components/_data-iterator.styl'
 
 import DataIterable from '../../mixins/data-iterable'
+// mixins
+import Contextmenu from '../../mixins/contextmenu'
 
 /* @vue/component */
 export default {
   name: 'v-data-iterator',
 
-  mixins: [DataIterable],
+  mixins: [DataIterable, Contextmenu],
 
   inheritAttrs: false,
 

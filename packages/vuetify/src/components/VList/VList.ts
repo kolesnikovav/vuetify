@@ -5,6 +5,7 @@ import VListGroup from './VListGroup'
 // Mixins
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
+import Contextmenu from '../../mixins/contextmenu'
 
 // Types
 import mixins from '../../util/mixins'
@@ -14,7 +15,8 @@ type VListGroupInstance = InstanceType<typeof VListGroup>
 
 export default mixins(
   RegistrableProvide('list'),
-  Themeable
+  Themeable,
+  Contextmenu
   /* @vue/component */
 ).extend({
   name: 'v-list',

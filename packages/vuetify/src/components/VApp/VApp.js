@@ -8,6 +8,10 @@ import Themeable from '../../mixins/themeable'
 // Directives
 import Resize from '../../directives/resize'
 
+import VContextMenu from '../VContextMenu'
+
+import Contextmenu from '../../mixins/contextmenu'
+
 /* @vue/component */
 export default {
   name: 'v-app',
@@ -18,7 +22,8 @@ export default {
 
   mixins: [
     AppTheme,
-    Themeable
+    Themeable,
+    Contextmenu
   ],
 
   props: {
@@ -55,9 +60,19 @@ export default {
       attrs: { 'data-app': true },
       domProps: { id: this.id }
     }
+    const contextMenuData = {
+      ref: 'contextMenu',
+      style: {
+        display: 'none',
+        position: 'absolute'
+      },
+      slot: 'context-menu',
+      domProps: { id: 'context-menu-common' }
+    }
+    const contextMenuWrapper = h(VContextMenu, contextMenuData)
 
     const wrapper = h('div', { staticClass: 'application--wrap' }, this.$slots.default)
 
-    return h('div', data, [wrapper])
+    return h('div', data, [wrapper, contextMenuWrapper])
   }
 }

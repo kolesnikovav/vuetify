@@ -8,13 +8,14 @@ import VIcon from '../VIcon'
 import Colorable from '../../mixins/colorable'
 import Toggleable from '../../mixins/toggleable'
 import Transitionable from '../../mixins/transitionable'
+import Contextmenu from '../../mixins/contextmenu'
 
 // Types
 import { VNode } from 'vue/types'
 import mixins from '../../util/mixins'
 
 /* @vue/component */
-export default mixins(Colorable, Toggleable, Transitionable).extend({
+export default mixins(Colorable, Toggleable, Transitionable, Contextmenu).extend({
   name: 'v-alert',
 
   props: {

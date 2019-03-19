@@ -7,6 +7,7 @@ import Head from './mixins/head'
 import Body from './mixins/body'
 import Foot from './mixins/foot'
 import Progress from './mixins/progress'
+import Contextmenu from '../../mixins/contextmenu'
 
 import {
   createSimpleFunctional,
@@ -20,7 +21,7 @@ const VTableOverflow = createSimpleFunctional('v-table__overflow')
 export default {
   name: 'v-data-table',
 
-  mixins: [DataIterable, Head, Body, Foot, Progress],
+  mixins: [DataIterable, Head, Body, Foot, Progress, Contextmenu],
 
   props: {
     headers: {

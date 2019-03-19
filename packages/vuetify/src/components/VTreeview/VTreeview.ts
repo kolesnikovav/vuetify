@@ -11,6 +11,7 @@ import VTreeviewNode, { VTreeviewNodeProps } from './VTreeviewNode'
 // Mixins
 import Themeable from '../../mixins/themeable'
 import { provide as RegistrableProvide } from '../../mixins/registrable'
+import Contextmenu from '../../mixins/contextmenu'
 
 // Utils
 import {
@@ -44,7 +45,8 @@ type NodeState = {
 
 export default mixins(
   RegistrableProvide('treeview'),
-  Themeable
+  Themeable,
+  Contextmenu
   /* @vue/component */
 ).extend({
   name: 'v-treeview',

@@ -7,6 +7,7 @@ import Overlayable from '../../mixins/overlayable'
 import Returnable from '../../mixins/returnable'
 import Stackable from '../../mixins/stackable'
 import Toggleable from '../../mixins/toggleable'
+import Contextmenu from '../../mixins/contextmenu'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
@@ -30,7 +31,8 @@ export default {
     Overlayable,
     Returnable,
     Stackable,
-    Toggleable
+    Toggleable,
+    Contextmenu
   ],
 
   props: {

@@ -6,6 +6,7 @@ import VSheet from '../VSheet'
 
 // Mixins
 import Routable from '../../mixins/routable'
+import Contextmenu from '../../mixins/contextmenu'
 
 // Helpers
 import mixins from '../../util/mixins'
@@ -16,7 +17,8 @@ import { VNode } from 'vue'
 /* @vue/component */
 export default mixins(
   Routable,
-  VSheet
+  VSheet,
+  Contextmenu
 ).extend({
   name: 'v-card',
 

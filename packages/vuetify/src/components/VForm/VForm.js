@@ -2,12 +2,13 @@
 import '../../stylus/components/_forms.styl'
 
 import { provide as RegistrableProvide } from '../../mixins/registrable'
+import Contextmenu from '../../mixins/contextmenu'
 
 /* @vue/component */
 export default {
   name: 'v-form',
 
-  mixins: [RegistrableProvide('form')],
+  mixins: [RegistrableProvide('form'), Contextmenu],
 
   inheritAttrs: false,
 

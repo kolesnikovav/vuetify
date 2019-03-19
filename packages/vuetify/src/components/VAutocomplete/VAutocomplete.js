@@ -8,6 +8,9 @@ import VTextField from '../VTextField/VTextField'
 // Utils
 import { keyCodes } from '../../util/helpers'
 
+// mixins
+import Contextmenu from '../../mixins/contextmenu'
+
 const defaultMenuProps = {
   ...VSelectMenuProps,
   offsetY: true,
@@ -18,7 +21,7 @@ const defaultMenuProps = {
 /* @vue/component */
 export default VSelect.extend({
   name: 'v-autocomplete',
-
+  mixins: [Contextmenu],
   props: {
     allowOverflow: {
       type: Boolean,

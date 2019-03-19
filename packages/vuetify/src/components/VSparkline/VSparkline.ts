@@ -1,5 +1,6 @@
 // Mixins
 import Colorable from '../../mixins/colorable'
+import Contextmenu from '../../mixins/contextmenu'
 
 // Utilities
 import mixins, { ExtractVue } from '../../util/mixins'
@@ -45,11 +46,13 @@ interface options extends Vue {
 export default mixins<options &
 /* eslint-disable indent */
   ExtractVue<[
-    typeof Colorable
+    typeof Colorable,
+    typeof Contextmenu
   ]>
 /* eslint-enable indent */
 >(
-  Colorable
+  Colorable,
+  Contextmenu
 ).extend({
   name: 'VSparkline',
 

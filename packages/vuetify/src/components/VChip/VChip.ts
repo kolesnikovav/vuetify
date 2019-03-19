@@ -11,9 +11,10 @@ import VIcon from '../VIcon'
 import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 import Toggleable from '../../mixins/toggleable'
+import Contextmenu from '../../mixins/contextmenu'
 
 /* @vue/component */
-export default mixins(Colorable, Themeable, Toggleable).extend({
+export default mixins(Colorable, Themeable, Toggleable, Contextmenu).extend({
   name: 'v-chip',
 
   props: {
