@@ -6,6 +6,7 @@ import { Command } from '../../mixins/contextmenu'
 import VListTile from '../VList/VListTile'
 import VIcon from '../VIcon'
 import VDivider from '../VDivider/VDivider'
+import { consoleError } from '../../util/console'
 
 interface MenuItemsMap {
   [id: string]: Command
@@ -152,7 +153,17 @@ export default Vue.extend({
     executeAction (e: any, c: string) {
       const cmd = this.menuItemsMap[c]
       if (typeof cmd.action === 'string') {
-        cmd.container[cmd.action]()
+        if (cmd.container) {
+          if (cmd.container[cmd.action]) {
+            cmd.container[cmd.action](cmd.target)
+          } else {
+            consoleError(`container not have a method ` + cmd.action, cmd)
+          }
+        } else {
+          consoleError(`container property must be defined if action  type is string`, cmd)
+        }
+      } else if (typeof cmd.action === 'function') {
+        cmd.action(cmd.target)
       }
     },
   },
