@@ -50,10 +50,17 @@ export default Vue.extend({
         const cMenuRef = 'CMenuItem'+ indexes.itemindex
         indexes.itemindex++
         indexes.menuItemsMap[cMenuRef] = cmd
+        let cmdCanBeExecuted = true
+        if (typeof cmd.canExecute === 'boolean') {
+          cmdCanBeExecuted = cmd.canExecute
+        } else if (typeof cmd.canExecute === 'function') {
+          cmdCanBeExecuted = cmd.canExecute()
+        }
         return [this.$createElement(VListTile, {
           ref: cMenuRef,
           props: {
             title: cmd.text,
+            disabled: !cmdCanBeExecuted
           },
           on: {
             click: (e: Event) => {
@@ -93,7 +100,7 @@ export default Vue.extend({
               e.preventDefault()
             }
           }
-        }, children)
+        }, [children])
         return [submenuTile, this.$createElement(VMenu, {
           ref: 'submenu' + indexes.submenuIndex,
           props: {
@@ -101,7 +108,7 @@ export default Vue.extend({
             positionX: this.positionXSubmenu,
             positionY: this.positionYSubmenu
           }
-        }, [submenuContent])]
+        }, [submenuContent, divider])]
       }
     },
     genContextMenu (): VNode {
@@ -141,7 +148,7 @@ export default Vue.extend({
     },
     deactivateContextMenu () {
       (this.$refs.contextmenu as any).$data.isActive = false;
-    },    
+    },
     executeAction (e: any, c: string) {
       const cmd = this.menuItemsMap[c]
       if (typeof cmd.action === 'string') {
