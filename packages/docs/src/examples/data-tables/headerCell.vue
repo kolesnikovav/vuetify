@@ -6,9 +6,11 @@
   >
     <template slot="headerCell" slot-scope="props">
       <v-tooltip bottom>
-        <span slot="activator">
-          {{ props.header.text }}
-        </span>
+        <template v-slot:activator="{ on }">
+          <span v-on="on">
+            {{ props.header.text }}
+          </span>
+        </template>
         <span>
           {{ props.header.text }}
         </span>
