@@ -4,6 +4,7 @@ import '../../stylus/components/_app.styl'
 import AppTheme from './mixins/app-theme'
 
 import Themeable from '../../mixins/themeable'
+import Droppable from '../../mixins/droppable'
 
 // Directives
 import Resize from '../../directives/resize'
@@ -18,7 +19,8 @@ export default {
 
   mixins: [
     AppTheme,
-    Themeable
+    Themeable,
+    Droppable
   ],
 
   props: {

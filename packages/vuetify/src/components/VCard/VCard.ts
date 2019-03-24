@@ -6,6 +6,8 @@ import VSheet from '../VSheet'
 
 // Mixins
 import Routable from '../../mixins/routable'
+import Droppable from '../../mixins/droppable'
+import Draggable from '../../mixins/draggable'
 
 // Helpers
 import mixins from '../../util/mixins'
@@ -16,7 +18,9 @@ import { VNode } from 'vue'
 /* @vue/component */
 export default mixins(
   Routable,
-  VSheet
+  VSheet,
+  Droppable,
+  Draggable
 ).extend({
   name: 'v-card',
 
